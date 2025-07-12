@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from '../types/Product';
+import '../styles/ProductCard.css';
 
 interface ProductCardProps {
   product: Product;
@@ -8,31 +9,31 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <div className="aspect-w-1 aspect-h-1 w-full">
+    <div className="product-card">
+      <div className="product-image-container">
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-full h-48 object-cover"
+          className="product-image"
         />
       </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xl font-bold text-primary-600">${product.price}</span>
-          <span className="text-sm text-gray-500">
+      <div className="product-content">
+        <h3 className="product-title">{product.name}</h3>
+        <p className="product-description">{product.description}</p>
+        <div className="product-details">
+          <span className="product-price">${product.price}</span>
+          <span className="product-stock">
             {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Out of stock'}
           </span>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
+        <div className="product-footer">
+          <span className="product-category">
             {product.category}
           </span>
           {onAddToCart && product.stockQuantity > 0 && (
             <button
               onClick={() => onAddToCart(product)}
-              className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 transition-colors duration-200"
+              className="add-to-cart-button"
             >
               Add to Cart
             </button>
